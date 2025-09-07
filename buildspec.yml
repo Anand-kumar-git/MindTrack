@@ -1,4 +1,4 @@
-version: 0.2 #V3
+version: 0.2
 
 phases:
   pre_build:
@@ -17,7 +17,9 @@ phases:
   post_build:
     commands:
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $ECR_REPO $IMAGE_URI > imageDetail.json
+      # 👇 Ensure the container name matches your deployment.yml ("my-app")
+      - printf '[{"name":"my-app","imageUri":"%s"}]' $IMAGE_URI > imageDetail.json
+
 artifacts:
   files:
     - imageDetail.json
