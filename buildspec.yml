@@ -6,6 +6,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
   build:
     commands:
       - echo Build started on `date`
@@ -14,6 +15,7 @@ phases:
       - docker build -t $IMAGE_URI .
       - echo Pushing Docker image...
       - docker push $IMAGE_URI
+
   post_build:
     commands:
       - echo Updating Kubernetes manifest with new image...
