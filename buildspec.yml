@@ -1,4 +1,4 @@
-version: 0.2 #v1
+version: 0.2 #v3
 
 phases:
   pre_build:
