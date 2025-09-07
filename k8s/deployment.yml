@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
+  labels:
+    app: my-app   # 👈 added here for consistency
 spec:
   replicas: 2
   selector:
@@ -14,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: PLACEHOLDER_IMAGE
+        image: PLACEHOLDER_IMAGE   # 👈 will be replaced in pipeline
         ports:
         - containerPort: 3000
