@@ -16,17 +16,13 @@ phases:
       - docker push $IMAGE_URI
   post_build:
     commands:
+      - echo Updating Kubernetes manifest with new image...
+      - sed -i "s|PLACEHOLDER_IMAGE|$IMAGE_URI|g" k8s/deployment.yml
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $ECR_REPO $IMAGE_URI > imageDetail.json
-
-      # 👇 Replace PLACEHOLDER_IMAGE with the actual ECR image URI
-      - echo Updating Kubernetes manifests...
-      - sed -i "s|PLACEHOLDER_IMAGE|$IMAGE_URI|g" k8s/deployment.yml
-
-      # 👇 Apply manifests to EKS
-      - echo Applying manifests to EKS...
-      - kubectl apply -f k8s/deployment.yml -f k8s/service.yml
 
 artifacts:
   files:
     - imageDetail.json
+    - k8s/deployment.yml
+    - k8s/service.yml
