@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: PLACEHOLDER_IMAGE   # 👈 will be replaced in
+        image: PLACEHOLDER_IMAGE
         ports:
         - containerPort: 3000
