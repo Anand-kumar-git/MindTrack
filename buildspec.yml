@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     AWS_DEFAULT_REGION: ap-south-1
-    ECR_REPO: mindtrack   
+    ECR_REPO: mindtrack   # <-- replace with your repo name
 
 phases:
   pre_build:
@@ -12,14 +12,17 @@ phases:
       - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
       - echo "AWS Account ID: $AWS_ACCOUNT_ID"
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
   build:
     commands:
       - echo Build started on `date`
       - IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$ECR_REPO:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo "Image URI: $IMAGE_URI"
       - echo Building Docker image...
       - docker build -t $IMAGE_URI .
       - echo Pushing Docker image...
       - docker push $IMAGE_URI
+
   post_build:
     commands:
       - echo Writing image definitions file...
