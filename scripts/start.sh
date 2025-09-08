@@ -9,4 +9,4 @@ aws ecr get-login-password --region ap-south-1 | docker login --username AWS --p
 # Extract image URI from imagedefinitions.json
 IMAGE_URI=$(cat /home/ubuntu/app/imagedefinitions.json | jq -r '.[0].imageUri')
 
-docker run -d --name my-app -p 80:80 $IMAGE_URI
+docker run -d --name my-app -p 9050:80 $IMAGE_URI
