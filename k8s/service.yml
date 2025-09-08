@@ -1,4 +1,4 @@
-apiVersion: v1 #v4
+apiVersion: v1 #v5
 kind: Service
 metadata:
   name: my-app-service
