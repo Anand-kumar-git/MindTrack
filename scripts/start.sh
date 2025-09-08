@@ -6,7 +6,7 @@ echo "Starting new container..."
 # Login to ECR
 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 787755074992.dkr.ecr.ap-south-1.amazonaws.com
 
-# Extract image URI from imagedefinitions.json (corrected path)
+# Extract image URI from imagedefinitions.json (correced path)
 IMAGE_DEF_FILE="/home/ec2-user/app/imagedefinitions.json"
 
 if [ ! -f "$IMAGE_DEF_FILE" ]; then
