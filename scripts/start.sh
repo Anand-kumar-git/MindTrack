@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Starting new container.."
+echo "Starting new container..."
 
 # Login to ECR
 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 787755074992.dkr.ecr.ap-south-1.amazonaws.com
